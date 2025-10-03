@@ -7,7 +7,13 @@ SECRET_KEY = 'django-insecure-your-secret-key-here'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.apexsocial.live', '.railway.app']
+ALLOWED_HOSTS = [
+    'socialapex.live',
+    'www.socialapex.live', 
+    '.railway.app',
+    'localhost',
+    '127.0.0.1'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
