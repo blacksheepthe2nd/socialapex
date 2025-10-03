@@ -1,0 +1,31 @@
+{} 
+ 
+{} 
+<div class="container"> 
+    <div class="profile-grid"> 
+        {} 
+        <a href="^{}" class="profile-card-link"> 
+            <div class="profile-card"> 
+                {} 
+                    <img src="{{ profile.profile_picture.url }}" alt="Profile photo of {{ profile.user.username }}"> 
+                {} 
+                    <div class="no-photo-fallback"> 
+                        No Photo 
+                    </div> 
+                {} 
+                <div class="profile-info"> 
+                    <h3>{{ profile.user.username }}, {{ profile.age }}</h3> 
+                    <p>{{ profile.bio|default:"A member of the Socivo community."|truncatewords:10 }}</p> 
+                </div> 
+            </div> 
+        </a> 
+        {} 
+        <p>No profiles found.</p> 
+        {} 
+    </div> 
+</div> 
+ 
+<a href="^{}" class="demo-nav"> 
+    <span>Back to Dashboard</span> 
+</a> 
+{} 

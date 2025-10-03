@@ -1,0 +1,32 @@
+﻿
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card" style="background-color: #111; border: 1px solid #222; border-radius: 15px;">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">Login to Socivo</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control" style="background-color: #1a1a1a; border: 1px solid #333; color: white;">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" style="background-color: #1a1a1a; border: 1px solid #333; color: white;">
+                        </div>
+                        <button type="submit" class="btn w-100 mt-3" style="background-color: #ABFF00; color: #000; font-weight: 600;">Login</button>
+                    </form>
+                    <p class="text-center mt-3">
+                        Don't have an account? <a href="{% url 'register' %}" style="color: #ABFF00;">Register here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+'@ | Set-Content -Path "templates\registration\login.html"

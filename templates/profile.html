@@ -1,0 +1,29 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+<div class=\"container\">
+    <div class=\"row justify-content-center\">
+        <div class=\"col-md-6\">
+            <div class=\"card\" style=\"background-color: #111; border: 1px solid #222; border-radius: 15px;\">
+                {% if profile.profile_picture %}
+                    <img src=\"{{ profile.profile_picture.url }}\" class=\"card-img-top\" alt=\"{{ profile.user.username }}\" style=\"height: 400px; object-fit: cover;\">
+                {% else %}
+                    <div class=\"no-photo-fallback\" style=\"height: 400px;\">
+                        No Photo
+                    </div>
+                {% endif %}
+                <div class=\"card-body p-4\">
+                    <h2 class=\"card-title\">{{ profile.user.username }}, {{ profile.age }}</h2>
+                    <p class=\"text-muted\">{{ profile.gender }}</p>
+                    <p class=\"card-text\">{{ profile.bio|default:\"No bio provided.\" }}</p>
+                    <p class=\"text-muted\">{{ profile.location|default:\"Location not specified\" }}</p>
+                    <form method=\"post\" action=\"{% url 'like_profile' profile.user.id %}\">
+                        {% csrf_token %}
+                        <button type=\"submit\" class=\"btn w-100\" style=\"background-color: #ABFF00; color: #000; font-weight: 600;\">Like</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

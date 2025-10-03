@@ -1,0 +1,64 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <a href=\"{% url 'login' %}\" class=\"login\">LOG IN</a>
+    
+    <section class=\"hero\">
+        <h1>Socivo</h1>
+        <p>(Pronounced: So-chee-vo)</p>
+    </section>
+    
+    <section class=\"intro-section fade-in\">
+        <h2>Mainstream is noise. Socivo is <span>signal.</span> A private space for those who value depth, intelligence, and genuine connection.</h2>
+    </section>
+    
+    <div class=\"horizontal-scroll-container\">
+        <section class=\"scroll-section\">
+            <div class=\"horizontal-card fade-in\">
+                <img src=\"{% static 'images/socivo1.jpg' %}\" alt=\"A confident woman at a minimalist bar\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='block';\">
+                <div style=\"width: 40%; height: 70vh; background: linear-gradient(45deg, #ABFF00, #000000); border-radius: 10px; display: none; align-items: center; justify-content: center; color: white; font-size: 1.2rem;\">The Individual Image</div>
+                <div class=\"card-text\">
+                    <h3>The Individual</h3>
+                    <p>Our members are chosen for their unique perspective and personal drive. We value substance over status and character over cliché.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class=\"scroll-section\">
+            <div class=\"horizontal-card fade-in\">
+                <img src=\"{% static 'images/socivo2.jpg' %}\" alt=\"An engaging man laughing during a conversation\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='block';\">
+                <div style=\"width: 40%; height: 70vh; background: linear-gradient(45deg, #ABFF00, #000000); border-radius: 10px; display: none; align-items: center; justify-content: center; color: white; font-size: 1.2rem;\">The Conversation Image</div>
+                <div class=\"card-text\">
+                    <h3>The Conversation</h3>
+                    <p>Forget small talk. We foster an environment where intelligent, witty, and meaningful conversations are the norm, not the exception.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class=\"scroll-section\">
+            <div class=\"horizontal-card fade-in\">
+                <img src=\"{% static 'images/socivo3.jpg' %}\" alt=\"A chic, mysterious art gallery event\" onerror=\"this.style.display='none'; this.nextElementSibling.style.display='block';\">
+                <div style=\"width: 40%; height: 70vh; background: linear-gradient(45deg, #ABFF00, #000000); border-radius: 10px; display: none; align-items: center; justify-content: center; color: white; font-size: 1.2rem;\">The Scene Image</div>
+                <div class=\"card-text\">
+                    <h3>The Scene</h3>
+                    <p>From private gallery viewings to curated dinners, membership provides access to exclusive events where you can connect in person.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <section class=\"final-cta fade-in\">
+        <h2>Join the Conversation.</h2>
+        <p>Access to Socivo is currently by referral or application only.</p>
+        <a href=\"{% url 'join' %}\" class=\"cta-button\">APPLY</a>
+        <footer>Socivo © 2025 | <a href=\"{% url 'terms' %}\" target=\"_blank\">Terms</a> | <a href=\"{% url 'privacy' %}\" target=\"_blank\">Privacy</a></footer>
+    </section>
+    
+    <a href=\"{% url 'join' %}\" class=\"demo-nav\">
+        <span>View Next Page</span>
+        <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
+            <path d=\"M5 12h14M12 5l7 7-7 7\"/>
+        </svg>
+    </a>
+{% endblock %}

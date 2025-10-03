@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Apply for Membership - Social Apex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: #000000;
+            --text: #FFFFFF;
+            --accent: #ABFF00;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .login {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 100;
+            letter-spacing: 1px;
+        }
+        .application-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .back-home {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+        .application-header h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .application-header p {
+            color: #ccc;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        .application-form {
+            background: rgba(171, 255, 0, 0.05);
+            border: 1px solid rgba(171, 255, 0, 0.2);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(171, 255, 0, 0.3);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .checkbox-group input {
+            width: auto;
+            margin-top: 3px;
+        }
+        .checkbox-group label {
+            font-weight: 300;
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: var(--accent);
+            color: var(--background);
+        }
+        footer {
+            padding: 40px 10% 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 0, 0.1);
+        }
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .copyright {
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <a href="/login/" class="login">LOG IN</a>
+    
+    <div class="application-container">
+        <a href="/" class="back-home">← Back to Home</a>
+        
+        <div class="application-header">
+            <h1>Membership Application</h1>
+            <p>Join the Social Apex community. Your privacy is respected.</p>
+        </div>
+        
+        <form class="application-form" id="membershipForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="your@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="age">Age</label>
+                <select id="age" name="age" required>
+                    <option value="">Select age range</option>
+                    <option value="18-24">18-24</option>
+                    <option value="25-34">25-34</option>
+                    <option value="35-44">35-44</option>
+                    <option value="45-54">45-54</option>
+                    <option value="55+">55+</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="gender">My Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select your gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Non-binary">Non-binary</option>
+                    <option value="Other">Other</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="lookingFor">Looking For</label>
+                <select id="lookingFor" name="lookingFor" required>
+                    <option value="">Select gender preference</option>
+                    <option value="Men">Men</option>
+                    <option value="Women">Women</option>
+                    <option value="Men & Women">Men & Women</option>
+                    <option value="All Genders">All Genders</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="interests">What are you looking for? (Select up to 3)</label>
+                <select id="interests" name="interests" multiple size="4" required>
+                    <option value="Meaningful Connections">Meaningful Connections</option>
+                    <option value="Intellectual Conversations">Intellectual Conversations</option>
+                    <option value="Social Events">Social Events</option>
+                    <option value="Cultural Experiences">Cultural Experiences</option>
+                    <option value="Serious Relationships">Serious Relationships</option>
+                    <option value="New Friends">New Friends</option>
+                    <option value="Personal Growth">Personal Growth</option>
+                    <option value="Networking">Networking</option>
+                </select>
+                <small style="color: #666; font-size: 0.8rem;">Hold Ctrl/Cmd to select multiple options</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="lifestyle">Lifestyle</label>
+                <select id="lifestyle" name="lifestyle">
+                    <option value="">Select your lifestyle</option>
+                    <option value="Professional">Professional</option>
+                    <option value="Creative">Creative</option>
+                    <option value="Entrepreneur">Entrepreneur</option>
+                    <option value="Academic">Academic</option>
+                    <option value="Traveler">Traveler</option>
+                    <option value="Foodie">Foodie</option>
+                    <option value="Athlete">Athlete</option>
+                </select>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="privacy" name="privacy" required>
+                <label for="privacy">I agree to the Privacy Policy and understand my data will be handled confidentially</label>
+            </div>
+            
+            <button type="submit" class="submit-btn">SUBMIT APPLICATION</button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 20px; color: #666; font-size: 0.8rem;">
+            Your information is secure and will only be used for membership consideration
+        </div>
+    </div>
+    
+    <footer>
+        <div>
+            <a href="/terms/" target="_blank">Terms</a>
+            <a href="/privacy/" target="_blank">Privacy</a>
+            <a href="#" target="_blank">Contact</a>
+        </div>
+        <div class="copyright">Social Apex © 2025</div>
+    </footer>
+
+    <script>
+        document.getElementById('membershipForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Check if max 3 interests are selected
+            const interests = document.getElementById('interests');
+            if (interests.selectedOptions.length > 3) {
+                alert('Please select no more than 3 options in "What are you looking for?"');
+                return;
+            }
+            
+            // Show success message
+            alert('Application submitted! We will review your application within 48 hours.');
+            window.location.href = '/';
+        });
+
+        // Limit multiple select to 3 options
+        document.getElementById('interests').addEventListener('change', function(e) {
+            if (this.selectedOptions.length > 3) {
+                alert('Please select no more than 3 options');
+                this.selectedOptions[this.selectedOptions.length - 1].selected = false;
+            }
+        });
+    </script>
+</body>
+</html>

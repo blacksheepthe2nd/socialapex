@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Social Apex - The Apex of Social Dating</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: #000000;
+            --text: #FFFFFF;
+            --accent: #ABFF00;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .login {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 100;
+            letter-spacing: 1px;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1;
+            text-shadow: 0 0 8px rgba(171, 255, 0, 0.7), 0 0 12px rgba(171, 255, 0, 0.5);
+            background: linear-gradient(135deg, #ABFF00 0%, #FFFFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero .subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-top: 15px;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        .intro-section {
+            padding: 100px 10%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .intro-section h2 {
+            font-size: 2.2rem;
+            line-height: 1.4;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+        .intro-section h2 span {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 80px 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 15px;
+            background: rgba(171, 255, 0, 0.05);
+            border: 1px solid rgba(171, 255, 0, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ABFF00 0%, #000000 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .feature-card h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .feature-card p {
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        .final-cta {
+            padding: 120px 10%;
+            text-align: center;
+            background: rgba(171, 255, 0, 0.03);
+        }
+        .final-cta h2 {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .final-cta p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 18px 60px;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+        .cta-button:hover {
+            background-color: var(--accent);
+            color: var(--background);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(171, 255, 0, 0.3);
+        }
+        footer {
+            padding: 60px 10% 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: var(--accent);
+        }
+        .copyright {
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+            }
+            .features-grid .feature-card:nth-child(3) {
+                grid-column: 1 / -1;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .hero .subtitle { font-size: 1.3rem; }
+            .intro-section h2 { font-size: 1.8rem; }
+            .features-grid { 
+                grid-template-columns: 1fr;
+                padding: 60px 5%;
+            }
+            .features-grid .feature-card:nth-child(3) {
+                grid-column: auto;
+                max-width: none;
+            }
+            .final-cta h2 { font-size: 2.2rem; }
+            .login { right: 20px; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .subtitle { font-size: 1.1rem; }
+            .intro-section h2 { font-size: 1.5rem; }
+            .feature-card { padding: 30px 20px; }
+            .final-cta { padding: 80px 5%; }
+        }
+    </style>
+</head>
+<body>
+    <a href="/login/" class="login">LOG IN</a>
+    
+    <section class="hero">
+        <h1>SOCIAL APEX</h1>
+        <div class="subtitle">THE APEX OF SOCIAL DATING</div>
+        <div class="scroll-indicator">Scroll to explore ↓</div>
+    </section>
+    
+    <section class="intro-section">
+        <h2>Mainstream dating is noise. Social Apex is <span>connection.</span> A private space for those who value depth, intelligence, and genuine relationships.</h2>
+    </section>
+    
+    <section class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">I</div>
+            <h3>The Individual</h3>
+            <p>Our members are chosen for their unique perspective and personal drive. We value substance over status and character over cliché.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">C</div>
+            <h3>The Conversation</h3>
+            <p>Forget small talk. We foster an environment where intelligent, witty, and meaningful conversations are the norm, not the exception.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">S</div>
+            <h3>The Experience</h3>
+            <p>From private gallery viewings to curated dinners, membership provides access to exclusive events where genuine connections happen.</p>
+        </div>
+    </section>
+    
+    <section class="final-cta">
+        <h2>Find Your Apex.</h2>
+        <p>Access to Social Apex is currently by referral or application only.</p>
+        <a href="/apply/" class="cta-button">APPLY FOR MEMBERSHIP</a>
+    </section>
+    
+    <footer>
+        <div>
+            <a href="/terms/" target="_blank">Terms</a>
+            <a href="/privacy/" target="_blank">Privacy</a>
+            <a href="#" target="_blank">Contact</a>
+        </div>
+        <div class="copyright">Social Apex © 2025</div>
+    </footer>
+
+    <script>
+        // Simple fade-in animation as user scrolls
+        const fadeElements = document.querySelectorAll('.intro-section, .feature-card, .final-cta');
+        
+        const fadeObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        fadeElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            fadeObserver.observe(el);
+        });
+    </script>
+</body>
+</html>

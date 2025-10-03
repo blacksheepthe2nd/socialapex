@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Welcome to Socivo</h2>
+    <p>Browse profiles and find matches.</p>
+    
+    <div class="profile-grid">
+        {% for profile in profiles %}
+        <a href="{% url 'profile_detail' profile.user.id %}" class="profile-card-link">
+            <div class="profile-card">
+                {% if profile.photos.first %}
+                <img src="{{ profile.photos.first.image.url }}" alt="{{ profile.user.username }}">
+                {% else %}
+                <div class="no-photo-fallback">No Photo</div>
+                {% endif %}
+                <div class="profile-info">
+                    <h3>{{ profile.user.username }}</h3>
+                    <p>{{ profile.bio|default:"No bio yet"|truncatewords:10 }}</p>
+                </div>
+            </div>
+        </a>
+        {% empty %}
+        <p>No profiles available.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
