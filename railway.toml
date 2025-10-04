@@ -2,7 +2,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn socialapex.wsgi:application"
+startCommand = "chmod +x deploy.sh && ./deploy.sh"
 
 [[services]]
 name = "web"
