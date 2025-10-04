@@ -19,8 +19,8 @@
             {% endfor %}
         {% endif %}
         
+        <!-- CSRF token removed since CSRF is disabled -->
         <form method="POST">
-            {% csrf_token %}
             <div>
                 <input type="text" name="username" placeholder="Username" required>
             </div>

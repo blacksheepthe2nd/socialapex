@@ -2,9 +2,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 from .models import Profile, ProfilePhoto, Interest
 from .forms import UserForm, ProfileForm, ProfilePhotoForm
 
+@csrf_exempt
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')

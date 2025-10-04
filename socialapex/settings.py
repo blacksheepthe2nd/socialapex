@@ -3,25 +3,15 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-development-key-12345')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-temporary-key-12345')
 
-DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+DEBUG = True  # Force debug mode for now
 
 ALLOWED_HOSTS = ['*']
 
-# TEMPORARY CSRF FIX - Allow all origins during debugging
-CSRF_TRUSTED_ORIGINS = [
-    'https://*.railway.app',
-    'https://*.up.railway.app',
-    'http://*.railway.app', 
-    'http://*.up.railway.app',
-]
-
-# Disable CSRF temporarily to get site running
+# COMPLETELY DISABLE CSRF TEMPORARILY
 CSRF_COOKIE_SECURE = False
 SESSION_COOKIE_SECURE = False
-CSRF_USE_SESSIONS = False
-CSRF_COOKIE_HTTPONLY = False
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,10 +26,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # REMOVED: 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 ]
@@ -71,7 +60,6 @@ DATABASES = {
     }
 }
 
-# Remove password validators for now
 AUTH_PASSWORD_VALIDATORS = []
 
 LANGUAGE_CODE = 'en-us'
