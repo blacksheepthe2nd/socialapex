@@ -1,9 +1,85 @@
 ﻿{% extends 'base.html' %}
 
 {% block content %}
-<div style=\"text-align: center; padding: 100px 20px;\">
-    <h1 style=\"color: #ABFF00; font-size: 3rem; margin-bottom: 20px;\">Login</h1>
-    <p style=\"color: #ccc; font-size: 1.2rem;\">Member login coming soon</p>
-    <a href=\"/\" style=\"color: #ABFF00; text-decoration: none;\">← Back to Home</a>
+<div class="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl">
+        <!-- Header -->
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-[#ABFF00] mb-2">Welcome Back</h1>
+            <p class="text-gray-300 text-lg">Sign in to your Social Apex account</p>
+        </div>
+
+        <!-- Login Form -->
+        <form class="mt-8 space-y-6" method="POST">
+            {% csrf_token %}
+            
+            <!-- Email Field -->
+            <div>
+                <label for="email" class="sr-only">Email address</label>
+                <input id="email" name="email" type="email" autocomplete="email" required 
+                       class="relative block w-full px-4 py-3 bg-white/5 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ABFF00] focus:border-transparent transition duration-200"
+                       placeholder="Email address">
+            </div>
+
+            <!-- Password Field with Toggle -->
+            <div class="relative">
+                <label for="password" class="sr-only">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required 
+                       class="relative block w-full px-4 py-3 pr-12 bg-white/5 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ABFF00] focus:border-transparent transition duration-200"
+                       placeholder="Password">
+                <!-- Show Password Toggle -->
+                <button type="button" onclick="togglePassword()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-[#ABFF00] transition duration-200">
+                    <svg id="eye-icon" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Remember Me & Forgot Password -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input id="remember-me" name="remember-me" type="checkbox" 
+                           class="h-4 w-4 text-[#ABFF00] focus:ring-[#ABFF00] border-gray-600 bg-white/5 rounded">
+                    <label for="remember-me" class="ml-2 block text-sm text-gray-300">Remember me</label>
+                </div>
+                <div class="text-sm">
+                    <a href="#" class="font-medium text-[#ABFF00] hover:text-[#ABFF00]/80 transition duration-200">Forgot password?</a>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" 
+                        class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-black bg-[#ABFF00] hover:bg-[#ABFF00]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ABFF00] transition duration-200 transform hover:scale-105">
+                    Sign In to Social Apex
+                </button>
+            </div>
+
+            <!-- Sign Up Link -->
+            <div class="text-center">
+                <p class="text-gray-400">
+                    Not a member? 
+                    <a href="/application" class="font-medium text-[#ABFF00] hover:text-[#ABFF00]/80 transition duration-200">Apply for membership</a>
+                </p>
+            </div>
+        </form>
+    </div>
 </div>
+
+<!-- JavaScript for Show Password Toggle -->
+<script>
+function togglePassword() {
+    const passwordField = document.getElementById('password');
+    const eyeIcon = document.getElementById('eye-icon');
+    
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        eyeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L7.757 7.757M9.878 9.878l3.121-3.121m-3.121 3.121l3.121 3.121"/>';
+    } else {
+        passwordField.type = 'password';
+        eyeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />';
+    }
+}
+</script>
 {% endblock %}
