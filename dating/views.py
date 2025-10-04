@@ -2,11 +2,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from django.views.decorators.csrf import csrf_exempt
-from .models import Profile, Interest  # Removed ProfilePhoto
-from .forms import UserForm, ProfileForm  # Removed ProfilePhotoForm
+from .models import Profile
 
-@csrf_exempt
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')
@@ -43,49 +40,10 @@ def profile_detail(request, pk):
 
 @login_required
 def create_profile(request):
-    if hasattr(request.user, 'profile'):
-        return redirect('edit_profile')
-
-    if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile = profile_form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            profile_form.save_m2m()
-            messages.success(request, 'Profile created successfully!')
-            return redirect('dashboard')
-    else:
-        user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm()
-
-    return render(request, 'create_profile.html', {
-        'user_form': user_form,
-        'profile_form': profile_form
-    })
+    from django.http import HttpResponse
+    return HttpResponse("Create profile page - coming soon")
 
 @login_required
 def edit_profile(request):
-    if not hasattr(request.user, 'profile'):
-        return redirect('create_profile')
-
-    profile = get_object_or_404(Profile, user=request.user)
-
-    if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=profile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, 'Profile updated successfully!')
-            return redirect('dashboard')
-    else:
-        user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm(instance=profile)
-
-    return render(request, 'edit_profile.html', {
-        'user_form': user_form,
-        'profile_form': profile_form
-    })
+    from django.http import HttpResponse
+    return HttpResponse("Edit profile page - coming soon")

@@ -1,102 +1,57 @@
-﻿{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
-<style>
-:root { --background: #000000; --text: #FFFFFF; --accent: #ABFF00; --border-color: #333; }
-body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background-color: var(--background); color: var(--text); }
-.container { max-width: 800px; margin: 0 auto; padding: 40px 20px 80px; }
-.profile-header { text-align: center; margin-bottom: 40px; }
-.profile-header h1 { font-size: 3rem; font-weight: 700; margin: 0; }
-.profile-header p { color: #ccc; font-size: 1.1rem; }
-.form-group { margin-bottom: 1.5rem; }
-.form-group label { display: block; font-size: 0.9rem; color: #aaa; margin-bottom: 0.5rem; }
-.form-group input, .form-group textarea, .form-group select { width: 100%; background: transparent; border: 1px solid var(--border-color); color: var(--text); padding: 15px; font-family: 'Poppins', sans-serif; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s ease; }
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
-.form-group textarea { min-height: 120px; resize: vertical; }
-.save-button-container { text-align: center; margin-top: 40px; }
-.save-button { padding: 15px 50px; border: 2px solid var(--accent); color: var(--accent); text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: all 0.3s ease; background: transparent; cursor: pointer; }
-.save-button:hover { background-color: var(--accent); color: var(--background); }
-.interests-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
-.interest-tag { border: 1px solid var(--border-color); color: #ccc; padding: 0.5rem 1rem; cursor: pointer; transition: all 0.2s ease; border-radius: 20px; }
-.interest-tag.selected { background-color: var(--accent); color: var(--background); border-color: var(--accent); font-weight: 600; }
-</style>
-
-<div class="container">
-    <div class="profile-header">
-        <h1>Create Your Profile</h1>
-        <p>Membership is curated. Tell us your perspective.</p>
-    </div>
-
-    <form method="post">
-        {% csrf_token %}
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Profile - Apex Social</title>
+    <style>
+        body { background: black; color: white; font-family: Arial; padding: 20px; }
+        .form-container { max-width: 500px; margin: 0 auto; }
+        input, textarea, select { width: 100%; padding: 10px; margin: 5px 0; background: #222; color: white; border: 1px solid #444; }
+        button { background: #abff00; color: black; padding: 10px 20px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Create Your Profile</h2>
         
-        <div class="form-group">
-            <label for="id_username">Username</label>
-            {{ user_form.username }}
-        </div>
+        {% if messages %}
+            {% for message in messages %}
+            <div style="color: red; margin: 10px 0;">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
         
-        <div class="form-group">
-            <label for="id_email">Email</label>
-            {{ user_form.email }}
-        </div>
-        
-        <div class="form-group">
-            <label for="id_first_name">First Name</label>
-            {{ user_form.first_name }}
-        </div>
-        
-        <div class="form-group">
-            <label for="id_last_name">Last Name</label>
-            {{ user_form.last_name }}
-        </div>
-        
-        <div class="form-group">
-            <label for="id_age">Age</label>
-            {{ profile_form.age }}
-        </div>
-        
-        <div class="form-group">
-            <label for="id_location">Location</label>
-            {{ profile_form.location }}
-        </div>
-        
-        <div class="form-group">
-            <label for="id_tagline">Your Tagline</label>
-            {{ profile_form.tagline }}
-        </div>
-        
-        <div class="form-group">
-            <label for="id_about">About You</label>
-            {{ profile_form.about }}
-        </div>
-        
-        <div class="form-group">
-            <label>Interests</label>
-            <div class="interests-tags">
-                {% for interest in profile_form.interests %}
-                <div class="interest-tag">
-                    {{ interest.tag }} {{ interest.choice_label }}
-                </div>
-                {% endfor %}
+        <form method="POST">
+            {% csrf_token %}
+            
+            <h3>Personal Information</h3>
+            <div>
+                <label>First Name:</label>
+                {{ user_form.first_name }}
             </div>
-        </div>
-
-        <div class="save-button-container">
-            <button type="submit" class="save-button">CREATE PROFILE</button>
-        </div>
-    </form>
-</div>
-
-<script>
-document.querySelectorAll('.interest-tag').forEach(tag => {
-    tag.addEventListener('click', () => {
-        tag.classList.toggle('selected');
-        const checkbox = tag.querySelector('input[type="checkbox"]');
-        if (checkbox) {
-            checkbox.checked = !checkbox.checked;
-        }
-    });
-});
-</script>
-{% endblock %}
+            <div>
+                <label>Last Name:</label>
+                {{ user_form.last_name }}
+            </div>
+            <div>
+                <label>Email:</label>
+                {{ user_form.email }}
+            </div>
+            
+            <h3>Profile Details</h3>
+            <div>
+                <label>Bio:</label>
+                {{ profile_form.bio }}
+            </div>
+            <div>
+                <label>Location:</label>
+                {{ profile_form.location }}
+            </div>
+            <div>
+                <label>Birth Date:</label>
+                {{ profile_form.birth_date }}
+            </div>
+            
+            <button type="submit">Create Profile</button>
+        </form>
+    </div>
+</body>
+</html>
