@@ -1,6 +1,5 @@
 ﻿from django.contrib import admin
-from .models import Profile, Interest  # Removed ProfilePhoto
+from .models import Profile, Interest
 
 admin.site.register(Profile)
 admin.site.register(Interest)
-# admin.site.register(ProfilePhoto)  # Commented out
