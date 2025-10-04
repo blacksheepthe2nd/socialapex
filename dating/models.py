@@ -1,47 +1,44 @@
 ﻿from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.urls import reverse
 
-class UserProfile(models.Model):
-    GENDER_CHOICES = [
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('O', 'Other'),
-    ]
+class Interest(models.Model):
+    name = models.CharField(max_length=100)
     
+    class Meta:
+        app_label = 'dating'
+    
+    def __str__(self):
+        return self.name
+
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
-    age = models.IntegerField(validators=[MinValueValidator(18), MaxValueValidator(100)])
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    location = models.CharField(max_length=100, blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    age = models.IntegerField()
+    location = models.CharField(max_length=100)
+    tagline = models.CharField(max_length=200)
+    about = models.TextField()
+    profile_image = models.URLField(max_length=500, blank=True, null=True)  # Add this field
+    interests = models.ManyToManyField(Interest, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        app_label = 'dating'
+    
     def __str__(self):
         return f"{self.user.username}'s Profile"
+    
+    def get_absolute_url(self):
+        return reverse('profile_detail', kwargs={'pk': self.pk})
 
-class Photo(models.Model):
-    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='photos')
-    image = models.ImageField(upload_to='user_photos/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
+class ProfilePhoto(models.Model):
+    profile = models.ForeignKey(Profile, related_name='photos', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='profile_photos/')
     is_primary = models.BooleanField(default=False)
-
-class Like(models.Model):
-    from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes_given')
-    to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes_received')
-    created_at = models.DateTimeField(auto_now_add=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
-        unique_together = ['from_user', 'to_user']
-
-class Match(models.Model):
-    users = models.ManyToManyField(User)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-class Message(models.Model):
-    match = models.ForeignKey(Match, on_delete=models.CASCADE)
-    sender = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
-    is_read = models.BooleanField(default=False)
+        app_label = 'dating'
+    
+    def __str__(self):
+        return f"Photo for {self.profile.user.username}"

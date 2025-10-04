@@ -1,21 +1,31 @@
 ﻿# Django
 *.pyc
-__pycache__/
+*__pycache__/
 db.sqlite3
 migrations/
 
-# Environment
+# Environment variables
 .env
-.venv
-venv/
+.env.local
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+
+# Static files (if collected)
+staticfiles/
+
+# Media files
+media/
+
+# Logs
+*.log
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Static files (collected)
-staticfiles/
+# Railway
+.railway/

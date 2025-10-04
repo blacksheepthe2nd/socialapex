@@ -1,0 +1,212 @@
+﻿[
+{
+    "model": "dating.profile",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "age": 28,
+        "location": "Paris, France",
+        "tagline": "Art Director & Flâneur",
+        "about": "I find beauty in brutalist architecture and the perfect espresso. My work is about telling visual stories, and my life is about collecting them. I'm drawn to witty conversation, spontaneous trips to see new art, and evenings that end with a great negroni and a new perspective.",
+        "interests": [1, 4, 12],
+        "created_at": "2024-01-15T10:00:00Z",
+        "updated_at": "2024-01-15T10:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 2,
+    "fields": {
+        "user": 3,
+        "age": 42,
+        "location": "London, UK",
+        "tagline": "Architect. Seeker of brutalist forms.",
+        "about": "I believe buildings should tell stories as much as the people who inhabit them. When I'm not designing spaces, you'll find me exploring forgotten industrial sites or discussing the poetry of concrete over single-origin coffee.",
+        "interests": [2, 12, 9],
+        "created_at": "2024-01-16T11:00:00Z",
+        "updated_at": "2024-01-16T11:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 3,
+    "fields": {
+        "user": 4,
+        "age": 31,
+        "location": "New York, USA",
+        "tagline": "Curating playlists and life experiences.",
+        "about": "Music producer by day, vinyl collector by night. I believe the right song can change everything. Looking for someone who appreciates the space between notes as much as the notes themselves.",
+        "interests": [7, 10, 3],
+        "created_at": "2024-01-17T12:00:00Z",
+        "updated_at": "2024-01-17T12:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 4,
+    "fields": {
+        "user": 5,
+        "age": 38,
+        "location": "Melbourne, Australia",
+        "tagline": "Writer. Enjoys deep conversation.",
+        "about": "I collect stories and moments. Currently working on my second novel about memory and identity. Love rainy afternoons in bookstores, philosophical debates, and finding the perfect sentence.",
+        "interests": [5, 9, 11],
+        "created_at": "2024-01-18T13:00:00Z",
+        "updated_at": "2024-01-18T13:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 5,
+    "fields": {
+        "user": 6,
+        "age": 25,
+        "location": "San Francisco, USA",
+        "tagline": "Tech Entrepreneur & Future Builder",
+        "about": "Building the next generation of sustainable tech. When I'm not coding, I'm hiking coastal trails or experimenting with fermentation. Believe in using technology to create meaningful human connections.",
+        "interests": [2, 6, 13],
+        "created_at": "2024-01-19T14:00:00Z",
+        "updated_at": "2024-01-19T14:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 6,
+    "fields": {
+        "user": 7,
+        "age": 35,
+        "location": "Dublin, Ireland",
+        "tagline": "Filmmaker and Storyteller",
+        "about": "I see the world through a lens, always looking for the perfect frame. Currently working on a documentary about urban beekeeping. Love authentic people and stories that haven't been told.",
+        "interests": [10, 3, 15],
+        "created_at": "2024-01-20T15:00:00Z",
+        "updated_at": "2024-01-20T15:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 7,
+    "fields": {
+        "user": 8,
+        "age": 29,
+        "location": "Milan, Italy",
+        "tagline": "Vintage Fashion Curator",
+        "about": "I believe style is personal archaeology. I hunt for forgotten garments and give them new life. Passionate about sustainable fashion, art deco architecture, and the perfect espresso martini.",
+        "interests": [1, 14, 4],
+        "created_at": "2024-01-21T16:00:00Z",
+        "updated_at": "2024-01-21T16:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 8,
+    "fields": {
+        "user": 9,
+        "age": 45,
+        "location": "Singapore",
+        "tagline": "Investor & Mentor to Visionaries",
+        "about": "I help extraordinary people build extraordinary things. When I'm not reviewing pitch decks, I'm practicing kendo or exploring hidden culinary gems. Value integrity above all else.",
+        "interests": [6, 4, 9],
+        "created_at": "2024-01-22T17:00:00Z",
+        "updated_at": "2024-01-22T17:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 9,
+    "fields": {
+        "user": 10,
+        "age": 32,
+        "location": "Tokyo, Japan",
+        "tagline": "Ceramic Artist & Tea Ceremony Master",
+        "about": "I find beauty in imperfection and meaning in ritual. My hands create vessels that hold stories. Looking for someone who appreciates the quiet moments and the space between words.",
+        "interests": [1, 8, 11],
+        "created_at": "2024-01-23T18:00:00Z",
+        "updated_at": "2024-01-23T18:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 10,
+    "fields": {
+        "user": 11,
+        "age": 36,
+        "location": "Cape Town, South Africa",
+        "tagline": "Marine Biologist & Ocean Advocate",
+        "about": "The ocean is my office and my sanctuary. Working to protect marine ecosystems while exploring the world's most remote coastlines. Believe in adventure with purpose.",
+        "interests": [13, 15, 3],
+        "created_at": "2024-01-24T19:00:00Z",
+        "updated_at": "2024-01-24T19:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 11,
+    "fields": {
+        "user": 12,
+        "age": 27,
+        "location": "Stockholm, Sweden",
+        "tagline": "UX Designer & Minimalism Enthusiast",
+        "about": "I design digital experiences that feel human. Passionate about Scandinavian design, functional fitness, and the psychology of why we love what we love.",
+        "interests": [2, 1, 8],
+        "created_at": "2024-01-25T20:00:00Z",
+        "updated_at": "2024-01-25T20:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 12,
+    "fields": {
+        "user": 13,
+        "age": 41,
+        "location": "Vancouver, Canada",
+        "tagline": "Wildlife Photographer & Conservationist",
+        "about": "I capture moments most people never see. From Arctic wolves to rainforest canopies, my life is about bearing witness to nature's majesty. Looking for someone who isn't afraid of getting their boots dirty.",
+        "interests": [10, 13, 15],
+        "created_at": "2024-01-26T21:00:00Z",
+        "updated_at": "2024-01-26T21:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 13,
+    "fields": {
+        "user": 14,
+        "age": 30,
+        "location": "Barcelona, Spain",
+        "tagline": "Architectural Historian & Flamenco Dancer",
+        "about": "I study how buildings remember and bodies forget. By day I research Gaudí, by night I lose myself in flamenco. Believe in living passionately and loving fearlessly.",
+        "interests": [12, 7, 3],
+        "created_at": "2024-01-27T22:00:00Z",
+        "updated_at": "2024-01-27T22:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 14,
+    "fields": {
+        "user": 15,
+        "age": 33,
+        "location": "Berlin, Germany",
+        "tagline": "Startup Founder & Electronic Music Producer",
+        "about": "Building the future by day, creating soundscapes by night. My life is a blend of binary code and analog warmth. Looking for someone who dances to their own rhythm.",
+        "interests": [2, 7, 6],
+        "created_at": "2024-01-28T23:00:00Z",
+        "updated_at": "2024-01-28T23:00:00Z"
+    }
+},
+{
+    "model": "dating.profile",
+    "pk": 15,
+    "fields": {
+        "user": 16,
+        "age": 26,
+        "location": "Buenos Aires, Argentina",
+        "tagline": "Sommelier & Tango Instructor",
+        "about": "I speak the languages of wine and dance. Teaching people to listen to their palates and their hearts. Believe the best conversations happen over a bottle of Malbec.",
+        "interests": [11, 7, 4],
+        "created_at": "2024-01-29T10:00:00Z",
+        "updated_at": "2024-01-29T10:00:00Z"
+    }
+}
+]

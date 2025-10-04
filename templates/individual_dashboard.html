@@ -1,0 +1,133 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+:root { --background: #000000; --text: #FFFFFF; --accent: #ABFF00; --border-color: #333; }
+body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background-color: var(--background); color: var(--text); overflow: hidden; }
+.dashboard-header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; z-index: 1000; box-sizing: border-box; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
+.logo { font-weight: 700; font-size: 1.5rem; color: var(--text); text-decoration: none; }
+.header-nav { display: flex; align-items: center; gap: 20px; }
+.header-nav a { color: var(--text); text-decoration: none; opacity: 0.7; transition: opacity 0.3s ease; }
+.header-nav a:hover { opacity: 1; }
+main { display: flex; justify-content: center; align-items: center; height: 100vh; }
+.card-container { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; }
+.profile-card { width: 90vw; height: 85vh; max-width: 400px; max-height: 600px; border-radius: 15px; overflow: hidden; position: absolute; display: flex; flex-direction: column; justify-content: flex-end; box-shadow: 0 10px 40px rgba(0,0,0,0.5); opacity: 0; transform: scale(0.95); transition: opacity 0.4s ease, transform 0.4s ease; border: 1px solid var(--border-color); }
+.profile-card.visible { opacity: 1; transform: scale(1); }
+.profile-image { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+.profile-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); }
+.profile-info { padding: 25px; position: relative; z-index: 2; color: #fff; }
+.profile-info h3 { font-size: 2rem; margin: 0 0 5px; font-weight: 700; }
+.profile-info p { margin: 0; font-size: 1.1rem; color: #ccc; }
+.actions { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; }
+.action-btn { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--border-color); background-color: rgba(20,20,20,0.8); backdrop-filter: blur(5px); color: #fff; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s ease; font-size: 2rem; text-decoration: none; }
+.action-btn:hover { transform: scale(1.1); }
+.action-btn.pass:hover { border-color: #ff3b30; color: #ff3b30; }
+.action-btn.connect { border-color: var(--accent); color: var(--accent); }
+.action-btn.connect:hover { background-color: var(--accent); color: var(--background); }
+.no-profiles { text-align: center; color: #888; }
+.no-profiles h2 { font-size: 1.5rem; }
+.icon { width: 24px; height: 24px; }
+.action-icon { width: 32px; height: 32px; }
+</style>
+
+<header class="dashboard-header">
+    <a href="{% url 'dashboard' %}" class="logo">Social Apex</a>
+    <nav class="header-nav">
+        <a href="{% url 'grid_view' %}" title="Switch to Grid View">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+        </a>
+        <a href="{% url 'edit_profile' %}" title="My Profile">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+    </nav>
+</header>
+
+<main>
+    <div id="card-container" class="card-container">
+        {% if profiles %}
+            {% for profile in profiles %}
+            <div class="profile-card" data-profile-id="{{ profile.id }}">
+                {% if profile.profile_image %}
+                    <img class="profile-image" src="{{ profile.profile_image }}" alt="{{ profile.user.username }}">
+                {% else %}
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #2a2a2a, #1a1a1a); display: flex; align-items: center; justify-content: center; color: #666;">
+                        No Image
+                    </div>
+                {% endif %}
+                <div class="profile-info">
+                    <h3>{{ profile.user.get_full_name|default:profile.user.username }}, {{ profile.age }}</h3>
+                    <p>{{ profile.tagline }}</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #888;">{{ profile.location }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-profiles">
+                <h2>No profiles available</h2>
+                <p>Check back later for new members.</p>
+            </div>
+        {% endif %}
+    </div>
+</main>
+
+<div class="actions">
+    <div class="action-btn pass" id="pass-btn">
+        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </div>
+    <div class="action-btn connect" id="connect-btn">
+        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.profile-card');
+    let currentCard = 0;
+    
+    function showCard(index) {
+        cards.forEach((card, i) => {
+            if (i === index) {
+                card.classList.add('visible');
+            } else {
+                card.classList.remove('visible');
+            }
+        });
+    }
+    
+    function nextCard() {
+        if (cards.length > 0) {
+            currentCard = (currentCard + 1) % cards.length;
+            showCard(currentCard);
+        }
+    }
+    
+    document.getElementById('pass-btn').addEventListener('click', nextCard);
+    document.getElementById('connect-btn').addEventListener('click', function() {
+        if (cards.length > 0) {
+            const currentProfileId = cards[currentCard].getAttribute('data-profile-id');
+            if (currentProfileId) {
+                window.location.href = '/dating/profile/' + currentProfileId + '/';
+            }
+        }
+    });
+    
+    if (cards.length > 0) {
+        showCard(currentCard);
+    }
+});
+</script>
+{% endblock %}

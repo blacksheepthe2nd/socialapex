@@ -1,0 +1,107 @@
+﻿[
+{
+    "model": "dating.interest",
+    "pk": 1,
+    "fields": {
+        "name": "Art & Design"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 2,
+    "fields": {
+        "name": "Technology"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 3,
+    "fields": {
+        "name": "Travel"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 4,
+    "fields": {
+        "name": "Fine Dining"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 5,
+    "fields": {
+        "name": "Literature"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 6,
+    "fields": {
+        "name": "Entrepreneurship"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 7,
+    "fields": {
+        "name": "Music"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 8,
+    "fields": {
+        "name": "Wellness"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 9,
+    "fields": {
+        "name": "Philosophy"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 10,
+    "fields": {
+        "name": "Photography"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 11,
+    "fields": {
+        "name": "Wine Tasting"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 12,
+    "fields": {
+        "name": "Architecture"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 13,
+    "fields": {
+        "name": "Sustainability"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 14,
+    "fields": {
+        "name": "Fashion"
+    }
+},
+{
+    "model": "dating.interest",
+    "pk": 15,
+    "fields": {
+        "name": "Adventure Sports"
+    }
+}
+]

@@ -1,0 +1,95 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+:root { --background: #000000; --text: #FFFFFF; --accent: #ABFF00; --border-color: #222; }
+body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background-color: var(--background); color: var(--text); }
+.hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); padding: 0 20px; }
+.hero-content { max-width: 800px; }
+.hero-logo { font-size: 4rem; font-weight: 800; color: var(--accent); margin-bottom: 1rem; letter-spacing: 2px; }
+.hero-tagline { font-size: 1.5rem; color: #ccc; margin-bottom: 2rem; line-height: 1.6; }
+.cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 3rem; }
+.cta-button { padding: 15px 40px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-size: 1.1rem; }
+.cta-primary { background-color: var(--accent); color: var(--background); }
+.cta-primary:hover { background-color: #99e600; transform: translateY(-2px); }
+.cta-secondary { border: 2px solid var(--accent); color: var(--accent); }
+.cta-secondary:hover { background-color: var(--accent); color: var(--background); transform: translateY(-2px); }
+.features-section { padding: 80px 20px; background: #111; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+.feature-card { text-align: center; padding: 40px 20px; }
+.feature-icon { width: 80px; height: 80px; margin: 0 auto 20px; background: rgba(171, 255, 0, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.feature-icon svg { width: 40px; height: 40px; stroke: var(--accent); }
+.feature-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--accent); }
+.feature-card p { color: #ccc; line-height: 1.6; }
+@media (max-width: 768px) {
+    .hero-logo { font-size: 3rem; }
+    .hero-tagline { font-size: 1.2rem; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .cta-button { width: 100%; max-width: 300px; }
+}
+</style>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-logo">SOCIAL APEX</h1>
+        <p class="hero-tagline">
+            Exclusive dating for extraordinary individuals. 
+            Where quality connections meet curated experiences.
+        </p>
+        <div class="cta-buttons">
+            <a href="{% url 'login' %}" class="cta-button cta-primary">Member Login</a>
+            <a href="#features" class="cta-button cta-secondary">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section" id="features">
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <h3>Curated Community</h3>
+            <p>Every member is carefully vetted to ensure a high-quality, exclusive dating experience with like-minded individuals.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </div>
+            <h3>Meaningful Connections</h3>
+            <p>Move beyond superficial swiping. Our platform fosters genuine connections based on shared values and interests.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+            </div>
+            <h3>Premium Experience</h3>
+            <p>Enjoy a sophisticated, ad-free environment designed for discerning individuals seeking serious relationships.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer style="background: #000; padding: 40px 20px; text-align: center; border-top: 1px solid #222;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <p style="color: #666; margin-bottom: 20px;">&copy; 2025 Social Apex. An exclusive dating community.</p>
+        <div style="display: flex; justify-content: center; gap: 30px;">
+            <a href="{% url 'login' %}" style="color: #ccc; text-decoration: none;">Login</a>
+            <a href="#" style="color: #ccc; text-decoration: none;">Privacy</a>
+            <a href="#" style="color: #ccc; text-decoration: none;">Terms</a>
+        </div>
+    </div>
+</footer>
+{% endblock %}

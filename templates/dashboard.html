@@ -1,28 +1,58 @@
-{% extends "base.html" %}
+﻿{% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container">
-    <h2>Welcome to Socivo</h2>
-    <p>Browse profiles and find matches.</p>
-    
-    <div class="profile-grid">
-        {% for profile in profiles %}
-        <a href="{% url 'profile_detail' profile.user.id %}" class="profile-card-link">
-            <div class="profile-card">
-                {% if profile.photos.first %}
-                <img src="{{ profile.photos.first.image.url }}" alt="{{ profile.user.username }}">
-                {% else %}
-                <div class="no-photo-fallback">No Photo</div>
-                {% endif %}
-                <div class="profile-info">
-                    <h3>{{ profile.user.username }}</h3>
-                    <p>{{ profile.bio|default:"No bio yet"|truncatewords:10 }}</p>
-                </div>
-            </div>
+<style>
+:root { --background: #000000; --text: #FFFFFF; --accent: #ABFF00; --border-color: #333; }
+body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background-color: var(--background); color: var(--text); overflow: hidden; }
+.dashboard-header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; z-index: 1000; box-sizing: border-box; }
+.logo { font-weight: 700; font-size: 1.5rem; color: var(--text); text-decoration: none; }
+.header-nav a { color: var(--text); text-decoration: none; margin-left: 30px; opacity: 0.7; transition: opacity 0.3s ease; }
+.header-nav a:hover { opacity: 1; }
+.icon { width: 24px; height: 24px; vertical-align: middle; }
+.choice-container { display: flex; justify-content: center; align-items: center; height: 100vh; width: 100%; gap: 5vw; }
+.choice-card { width: 300px; height: 400px; border: 2px solid var(--border-color); border-radius: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer; transition: all 0.3s ease; text-decoration: none; color: var(--text); }
+.choice-card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 10px 30px rgba(171, 255, 0, 0.1); }
+.choice-icon { width: 80px; height: 80px; stroke: var(--text); margin-bottom: 20px; transition: stroke 0.3s ease; }
+.choice-card:hover .choice-icon { stroke: var(--accent); }
+.choice-card h2 { font-size: 1.5rem; margin: 10px 0 5px; }
+.choice-card p { font-size: 0.9rem; color: #888; max-width: 80%; }
+@media (max-width: 768px) { .choice-container { flex-direction: column; gap: 5vh; } .choice-card { width: 80vw; height: 250px; } }
+</style>
+
+<header class="dashboard-header">
+    <a href="#" class="logo">Social Apex</a>
+    <nav class="header-nav">
+        {% if user.is_authenticated %}
+            <a href="{% url 'edit_profile' %}" title="My Profile">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </a>
+        {% endif %}
+    </nav>
+</header>
+
+<main>
+    <div class="choice-container">
+        <a href="{% url 'individual_view' %}" class="choice-card">
+            <svg class="choice-icon" viewBox="0 0 100 100" fill="none">
+                <rect x="15" y="10" width="70" height="80" rx="8" stroke-width="4"/>
+            </svg>
+            <h2>Individual View</h2>
+            <p>A focused, curated experience. Consider one profile at a time.</p>
         </a>
-        {% empty %}
-        <p>No profiles available.</p>
-        {% endfor %}
+        <a href="{% url 'grid_view' %}" class="choice-card">
+            <svg class="choice-icon" viewBox="0 0 100 100" fill="none">
+                <rect x="15" y="15" width="30" height="30" rx="4" stroke-width="4"/>
+                <rect x="55" y="15" width="30" height="30" rx="4" stroke-width="4"/>
+                <rect x="15" y="55" width="30" height="30" rx="4" stroke-width="4"/>
+                <rect x="55" y="55" width="30" height="30" rx="4" stroke-width="4"/>
+            </svg>
+            <h2>Grid View</h2>
+            <p>An overview of the community. Discover multiple profiles at once.</p>
+        </a>
     </div>
-</div>
+</main>
 {% endblock %}

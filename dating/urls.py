@@ -1,10 +1,12 @@
-from django.urls import path 
-from . import views 
- 
-urlpatterns = [ 
-    path('', views.dashboard, name='dashboard'), 
-    path('register/', views.register, name='register'), 
-    path('create-profile/', views.create_profile, name='create_profile'), 
-    path('grid/', views.profiles_grid, name='profiles_grid'), 
-    path('matches/', views.matches, name='matches'), 
-] 
+﻿from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('login/', views.login_view, name='login'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('individual/', views.individual_view, name='individual_view'),
+    path('grid/', views.grid_view, name='grid_view'),
+    path('profile/<int:pk>/', views.profile_detail, name='profile_detail'),
+    path('create-profile/', views.create_profile, name='create_profile'),
+    path('edit-profile/', views.edit_profile, name='edit_profile'),
+]

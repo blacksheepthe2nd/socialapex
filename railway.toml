@@ -1,0 +1,10 @@
+﻿[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn socialapex.wsgi:application"
+
+[[services]]
+name = "web"
+[http]
+port = 8000

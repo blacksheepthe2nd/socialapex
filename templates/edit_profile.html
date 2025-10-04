@@ -24,8 +24,8 @@ body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background-col
 
 <div class="container">
     <div class="profile-header">
-        <h1>Create Your Profile</h1>
-        <p>Membership is curated. Tell us your perspective.</p>
+        <h1>Edit Your Profile</h1>
+        <p>Update your information and preferences</p>
     </div>
 
     <form method="post">
@@ -75,7 +75,7 @@ body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background-col
             <label>Interests</label>
             <div class="interests-tags">
                 {% for interest in profile_form.interests %}
-                <div class="interest-tag">
+                <div class="interest-tag {% if interest.data.selected %}selected{% endif %}">
                     {{ interest.tag }} {{ interest.choice_label }}
                 </div>
                 {% endfor %}
@@ -83,7 +83,7 @@ body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background-col
         </div>
 
         <div class="save-button-container">
-            <button type="submit" class="save-button">CREATE PROFILE</button>
+            <button type="submit" class="save-button">UPDATE PROFILE</button>
         </div>
     </form>
 </div>

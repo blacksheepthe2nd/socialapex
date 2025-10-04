@@ -1,116 +1,89 @@
-from django.shortcuts import render, redirect, get_object_or_404
+﻿from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
-from django.db.models import Q
-from django.contrib.auth.models import User
-from .models import UserProfile, Like, Match
-from .forms import CustomUserCreationForm, UserProfileForm
+from django.contrib.auth import login, authenticate
+from django.contrib import messages
+from .models import Profile, ProfilePhoto, Interest
+from .forms import UserForm, ProfileForm, ProfilePhotoForm
 
-def register(request):
+def login_view(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
             login(request, user)
-            return redirect('create_profile')
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'registration/register.html', {'form': form})
-
-@login_required
-def create_profile(request):
-    try:
-        profile = request.user.userprofile
-    except UserProfile.DoesNotExist:
-        profile = None
-
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            profile.save()
-            return redirect('dashboard')
-    else:
-        form = UserProfileForm(instance=profile)
-
-    return render(request, 'create_profile.html', {'form': form})
+            return redirect('/dating/dashboard/')
+        else:
+            messages.error(request, 'Invalid credentials')
+    
+    return render(request, 'login.html')
 
 @login_required
 def dashboard(request):
-    # Skip profile check for superusers/staff
-    if not request.user.is_superuser and not request.user.is_staff:
-        try:
-            request.user.userprofile
-        except UserProfile.DoesNotExist:
-            return redirect('create_profile')
-
-    liked_user_ids = Like.objects.filter(from_user=request.user).values_list('to_user_id', flat=True)
-    profiles = UserProfile.objects.exclude(
-        Q(user=request.user) | Q(user_id__in=liked_user_ids)
-    )[:20]
-
-    return render(request, 'dashboard.html', {'profiles': profiles})
+    return render(request, 'dashboard.html')
 
 @login_required
-def profiles_grid(request):
-    # Skip profile check for superusers/staff
-    if not request.user.is_superuser and not request.user.is_staff:
-        try:
-            request.user.userprofile
-        except UserProfile.DoesNotExist:
-            return redirect('create_profile')
-
-    profiles = UserProfile.objects.exclude(user=request.user)
-    return render(request, 'profiles_grid.html', {'profiles': profiles})
+def individual_view(request):
+    profiles = Profile.objects.all().order_by('?')
+    return render(request, 'individual_dashboard.html', {'profiles': profiles})
 
 @login_required
-def profile_detail(request, user_id):
-    # Skip profile check for superusers/staff
-    if not request.user.is_superuser and not request.user.is_staff:
-        try:
-            request.user.userprofile
-        except UserProfile.DoesNotExist:
-            return redirect('create_profile')
-
-    profile = get_object_or_404(UserProfile, user_id=user_id)
-    return render(request, 'profile.html', {'profile': profile})
+def grid_view(request):
+    profiles = Profile.objects.all().order_by('?')
+    return render(request, 'grid_dashboard.html', {'profiles': profiles})
 
 @login_required
-def like_profile(request, user_id):
-    # Skip profile check for superusers/staff
-    if not request.user.is_superuser and not request.user.is_staff:
-        try:
-            request.user.userprofile
-        except UserProfile.DoesNotExist:
-            return redirect('create_profile')
+def profile_detail(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    return render(request, 'user_profile.html', {'profile': profile})
+
+@login_required
+def create_profile(request):
+    if hasattr(request.user, 'profile'):
+        return redirect('edit_profile')
 
     if request.method == 'POST':
-        to_user = get_object_or_404(User, id=user_id)
-        like, created = Like.objects.get_or_create(
-            from_user=request.user,
-            to_user=to_user
-        )
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            profile_form.save_m2m()
+            messages.success(request, 'Profile created successfully!')
+            return redirect('dashboard')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm()
 
-        mutual_like = Like.objects.filter(
-            from_user=to_user,
-            to_user=request.user
-        ).exists()
-
-        if mutual_like:
-            match, created = Match.objects.get_or_create()
-            match.users.add(request.user, to_user)
-
-    return redirect('dashboard')
+    return render(request, 'create_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
 
 @login_required
-def matches(request):
-    # Skip profile check for superusers/staff
-    if not request.user.is_superuser and not request.user.is_staff:
-        try:
-            request.user.userprofile
-        except UserProfile.DoesNotExist:
-            return redirect('create_profile')
+def edit_profile(request):
+    if not hasattr(request.user, 'profile'):
+        return redirect('create_profile')
 
-    user_matches = Match.objects.filter(users=request.user)
-    return render(request, 'matches.html', {'matches': user_matches})
+    profile = get_object_or_404(Profile, user=request.user)
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('dashboard')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=profile)
+
+    return render(request, 'edit_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
