@@ -105,10 +105,8 @@ LOGIN_REDIRECT_URL = '/dating/dashboard/'
 LOGIN_URL = '/dating/login/' 
  
 # Railway production settings 
-if 'RAILWAY_STATIC_URL' in os.environ: 
     ALLOWED_HOSTS = ['*'] 
     DEBUG = False 
  
     # Static files for Railway 
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
-    STATIC_URL = os.environ.get('RAILWAY_STATIC_URL', 'static/') 
