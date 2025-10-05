@@ -1,10 +1,4 @@
-﻿[build]
-builder = "nixpacks"
-
-[deploy]
-startCommand = "chmod +x deploy.sh && ./deploy.sh"
-
-[[services]]
-name = "web"
-[http]
-port = 8000
+[build] 
+builder = "nixpacks" 
+buildCommand = "python manage.py collectstatic --noinput && python manage.py migrate" 
+startCommand = "gunicorn socialapex.wsgi:application --bind 0.0.0.0:$PORT" 
