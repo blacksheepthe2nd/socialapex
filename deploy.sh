@@ -6,12 +6,6 @@ echo "=== Apex Social Final Deployment ==="
 # 1. Apply ALL migrations (no more missing tables)
 echo "Applying migrations..."
 python manage.py migrate
-python manage.py migrate admin
-python manage.py migrate auth
-python manage.py migrate contenttypes
-python manage.py migrate sessions
-python manage.py migrate main
-python manage.py migrate dating
 
 # 2. Create essential data (no more empty databases)
 echo "Creating essential data..."
