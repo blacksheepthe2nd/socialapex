@@ -111,4 +111,4 @@ if 'RAILWAY_STATIC_URL' in os.environ:
  
     # Static files for Railway 
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
-    STATIC_URL = os.environ.get('RAILWAY_STATIC_URL', '/static/') 
+    STATIC_URL = os.environ.get('RAILWAY_STATIC_URL', 'static/') 
