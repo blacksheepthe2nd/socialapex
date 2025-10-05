@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Interest(models.Model):
     name = models.CharField(max_length=100)
-    
+
     def __str__(self):
         return self.name
 
@@ -13,7 +13,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     interests = models.ManyToManyField(Interest, blank=True)
-    
+
     def __str__(self):
         return self.user.username
 
@@ -23,6 +23,6 @@ class Profile(models.Model):
 #     image = models.ImageField(upload_to='profile_photos/')
 #     is_primary = models.BooleanField(default=False)
 #     uploaded_at = models.DateTimeField(auto_now_add=True)
-#     
+#
 #     def __str__(self):
 #         return f"Photo for {self.profile.user.username}"
