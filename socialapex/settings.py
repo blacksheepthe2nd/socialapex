@@ -1,6 +1,7 @@
 """Django settings for socialapex project.""" 
  
 import os 
+import dj_database_url
 from pathlib import Path 
  
 # Build paths inside the project like this: BASE_DIR / 'subdir'. 
