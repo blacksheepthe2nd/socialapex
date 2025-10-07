@@ -53,39 +53,28 @@ def edit_profile(request):
 def register_view(request): 
     return render(request, 'registration/register.html') 
 
-# TEMPORARY - DIAGNOSTIC USER CREATION
-def create_test_user(request):
-    from django.contrib.auth.models import User
+# TEMPORARY DEBUG - CHECK SYSTEM HEALTH
+def debug_system(request):
     from django.http import HttpResponse
-    from django.contrib.auth import authenticate
+    issues = []
     
-    response_lines = []
+    try:
+        from .models import UserProfile
+        issues.append("✅ UserProfile model imports OK")
+    except Exception as e:
+        issues.append(f"❌ UserProfile import failed: {e}")
     
-    # Check if user exists
-    if User.objects.filter(username='test').exists():
-        user = User.objects.get(username='test')
-        response_lines.append(f"⚠️ User 'test' already exists (ID: {user.id})")
-        
-        # Test authentication
-        auth_user = authenticate(username='test', password='test123')
-        if auth_user:
-            response_lines.append("✅ Authentication SUCCESS with test/test123")
-        else:
-            response_lines.append("❌ Authentication FAILED with test/test123")
-        
-        # Delete existing
-        User.objects.filter(username='test').delete()
-        response_lines.append("🗑️ Deleted existing user")
+    try:
+        profile_count = UserProfile.objects.count()
+        issues.append(f"✅ UserProfile table exists: {profile_count} profiles")
+    except Exception as e:
+        issues.append(f"❌ UserProfile table error: {e}")
     
-    # Create new user
-    new_user = User.objects.create_user('test', password='test123')
-    response_lines.append(f"✅ Created new user: 'test' (ID: {new_user.id})")
+    try:
+        from django.contrib.auth.models import User
+        user_count = User.objects.count()
+        issues.append(f"✅ User table exists: {user_count} users")
+    except Exception as e:
+        issues.append(f"❌ User table error: {e}")
     
-    # Verify creation
-    verify_user = authenticate(username='test', password='test123')
-    if verify_user:
-        response_lines.append("🎉 SUCCESS: New user can authenticate!")
-    else:
-        response_lines.append("💥 FAILED: New user cannot authenticate!")
-    
-    return HttpResponse("<br>".join(response_lines))
+    return HttpResponse("<br>".join(issues))
