@@ -12,6 +12,6 @@ urlpatterns = [
     path('grid/', views.grid_view, name='grid_view'), 
     path('create-profile/', views.create_profile, name='create_profile'), 
     path('edit-profile/', views.edit_profile, name='edit_profile'), 
-    path('debug-system/', views.debug_system, name='debug_system'),
     path('debug-models/', views.debug_models, name='debug_models'),
+  
 ] 

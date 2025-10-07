@@ -53,29 +53,14 @@ def edit_profile(request):
 def register_view(request): 
     return render(request, 'registration/register.html') 
 
-# TEMPORARY DEBUG - CHECK SYSTEM HEALTH
-def debug_system(request):
+def debug_models(request):
     from django.http import HttpResponse
-    issues = []
+    import os
+    models_path = os.path.join(os.path.dirname(__file__), 'models.py')
     
     try:
-        from .models import UserProfile
-        issues.append("✅ UserProfile model imports OK")
+        with open(models_path, 'r') as f:
+            content = f.read()
+            return HttpResponse(f"<pre>{content}</pre>")
     except Exception as e:
-        issues.append(f"❌ UserProfile import failed: {e}")
-    
-    try:
-        profile_count = UserProfile.objects.count()
-        issues.append(f"✅ UserProfile table exists: {profile_count} profiles")
-    except Exception as e:
-        issues.append(f"❌ UserProfile table error: {e}")
-    
-    try:
-        from django.contrib.auth.models import User
-        user_count = User.objects.count()
-        issues.append(f"✅ User table exists: {user_count} users")
-    except Exception as e:
-        issues.append(f"❌ User table error: {e}")
-    
-    return HttpResponse("<br>".join(issues))
-
+        return HttpResponse(f"❌ Cannot read models.py: {e}")
