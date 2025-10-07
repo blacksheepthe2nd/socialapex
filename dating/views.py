@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages 
 from .models import Profile 
  
+@csrf_exempt
 def login_view(request): 
     if request.method == 'POST': 
         username = request.POST.get('username', '') 
