@@ -259,32 +259,6 @@
             border-bottom-color: #e91e63;
         }
 
-
-        .tab-content {
-            min-height: 150px;
-            padding: 15px 0;
-        }
-
-        .interests-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .interest {
-            background: rgba(171, 255, 0, 0.1);
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid rgba(171, 255, 0, 0.2);
-        }
-
-        .about-text {
-            line-height: 1.6;
-            color: #ccc;
-            font-size: 15px;
-        }
-
         /* ACTION BUTTONS */
         .action-buttons {
             display: flex;
@@ -314,6 +288,14 @@
 
         .btn-connect:active {
             background-color: #d81b60;
+            transform: scale(0.98);
+        }
+
+            background-color: #333;
+            color: #fff;
+        }
+
+            background-color: #444;
             transform: scale(0.98);
         }
 
@@ -515,28 +497,8 @@
 
             <!-- TABS -->
             <div class="tabs">
-                <div class="tab active" data-tab="interests">Interests</div>
-                <div class="tab" data-tab="about">About</div>
-            </div>
-
-            <div class="tab-content">
-                <div id="interests-tab" class="tab-panel active">
-                    <div class="interests-grid">
-                        <div class="interest">Travel</div>
-                        <div class="interest">Photography</div>
-                        <div class="interest">Yoga</div>
-                        <div class="interest">Coffee</div>
-                        <div class="interest">Hiking</div>
-                        <div class="interest">Movies</div>
-                    </div>
-                </div>
-                
-                <div id="about-tab" class="tab-panel">
-                    <div class="about-text">
-                        <p>Hi there! I'm Sarah, a graphic designer from New York. I love exploring new places, trying different cuisines, and meeting interesting people.</p>
-                        <p style="margin-top: 15px;">In my free time, you can find me at yoga classes, coffee shops, or planning my next travel adventure. I believe life's too short for boring conversations!</p>
-                    </div>
-                </div>
+                <div class="tab active">Interests</div>
+                <div class="tab">About</div>
             </div>
 
             <!-- ACTION BUTTONS -->
@@ -674,13 +636,6 @@
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-                
-                document.querySelectorAll('.tab-panel').forEach(panel => {
-                    panel.classList.remove('active');
-                });
-                
-                const tabId = this.getAttribute('data-tab') + '-tab';
-                document.getElementById(tabId).classList.add('active');
             });
         });
 
