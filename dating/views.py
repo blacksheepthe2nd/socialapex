@@ -78,3 +78,4 @@ def debug_system(request):
         issues.append(f"❌ User table error: {e}")
     
     return HttpResponse("<br>".join(issues))
+
