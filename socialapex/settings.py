@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-development-key-change-in-production'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['socialapex.live', 'www.socialapex.live', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -91,5 +91,5 @@ LOGIN_REDIRECT_URL = '/dating/dashboard/'
 LOGIN_URL = '/dating/login/'
 
 if 'RAILWAY_STATIC_URL' in os.environ:
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['socialapex.live', 'www.socialapex.live', '.railway.app', 'localhost', '127.0.0.1']
     DEBUG = False
