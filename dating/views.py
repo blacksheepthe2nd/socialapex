@@ -52,3 +52,40 @@ def edit_profile(request):
  
 def register_view(request): 
     return render(request, 'registration/register.html') 
+
+# TEMPORARY - DIAGNOSTIC USER CREATION
+def create_test_user(request):
+    from django.contrib.auth.models import User
+    from django.http import HttpResponse
+    from django.contrib.auth import authenticate
+    
+    response_lines = []
+    
+    # Check if user exists
+    if User.objects.filter(username='test').exists():
+        user = User.objects.get(username='test')
+        response_lines.append(f"⚠️ User 'test' already exists (ID: {user.id})")
+        
+        # Test authentication
+        auth_user = authenticate(username='test', password='test123')
+        if auth_user:
+            response_lines.append("✅ Authentication SUCCESS with test/test123")
+        else:
+            response_lines.append("❌ Authentication FAILED with test/test123")
+        
+        # Delete existing
+        User.objects.filter(username='test').delete()
+        response_lines.append("🗑️ Deleted existing user")
+    
+    # Create new user
+    new_user = User.objects.create_user('test', password='test123')
+    response_lines.append(f"✅ Created new user: 'test' (ID: {new_user.id})")
+    
+    # Verify creation
+    verify_user = authenticate(username='test', password='test123')
+    if verify_user:
+        response_lines.append("🎉 SUCCESS: New user can authenticate!")
+    else:
+        response_lines.append("💥 FAILED: New user cannot authenticate!")
+    
+    return HttpResponse("<br>".join(response_lines))
