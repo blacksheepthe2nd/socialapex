@@ -1,4 +1,5 @@
-# socialapex/middleware.py
+# fix_middleware.py
+middleware_code = '''# socialapex/middleware.py
 from django.shortcuts import render
 
 class MaintenanceMiddleware:
@@ -22,3 +23,9 @@ class MaintenanceMiddleware:
             return render(request, 'maintenance.html')
         
         return self.get_response(request)
+'''
+
+with open('socialapex/middleware.py', 'w', encoding='utf-8') as f:
+    f.write(middleware_code)
+
+print("✅ Updated middleware to allow login requests")
