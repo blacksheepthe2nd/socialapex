@@ -9,16 +9,20 @@ class MaintenanceMiddleware:
         # Check if user has access via cookie
         has_access = request.COOKIES.get('site_access') == 'true'
         
-        # URLs that are always allowed (admin, static files, login POST, etc.)
+        # URLs that are always allowed
         public_urls = [
             '/admin/', 
             '/static/', 
             '/media/',
-            '/dating/login/'  # Allow login page and login POST requests
+            '/dating/login/',  # Allow login page
+            '/favicon.ico'
         ]
         
-        # If no access and not a public URL, show maintenance page
-        if not has_access and not any(request.path.startswith(url) for url in public_urls):
+        # Allow authenticated users (they passed login)
+        user_authenticated = request.user.is_authenticated
+        
+        # If no access, not authenticated, and not a public URL, show maintenance page
+        if not has_access and not user_authenticated and not any(request.path.startswith(url) for url in public_urls):
             return render(request, 'maintenance.html')
         
         return self.get_response(request)
